@@ -1,12 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Search from "../components/search";
-import FilmDetail from "../components/filmDetails";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import FavoritesFilm from "../components/favoritesFilm";
 import Icon from "react-native-vector-icons/AntDesign";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
+// import Icon from "react-native-vector-icons/MaterialIcons";
+// import Icon from "react-native-vector-icons/Entypo";
 import Test from "../components/test";
+import filmDetails from "../components/filmDetails";
+import News from "../components/News";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +16,7 @@ const Navigation = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="search" component={Search} />
-      <Stack.Screen name="Details" component={FilmDetail} />
+      <Stack.Screen name="Details" component={filmDetails} />
     </Stack.Navigator>
   );
 };
@@ -23,20 +25,7 @@ const Favorites = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Favorite films" component={FavoritesFilm} />
-      <Stack.Screen
-        name="Details"
-        component={FilmDetail}
-        options={{
-          headerTitle: (props) => <Icon2 ios-share />,
-          headerRight: () => (
-            <Button
-              onPress={() => alert("This is a button!")}
-              title="Info"
-              color="#fff"
-            />
-          ),
-        }}
-      />
+      <Stack.Screen name="Details" component={filmDetails} />
     </Stack.Navigator>
   );
 };
@@ -55,6 +44,8 @@ export default function TabNavigation() {
               iconName = "heart";
             } else if (route.name === "Search") {
               iconName = "search1";
+            } else if (route.name === "news") {
+              iconName = "new";
             }
 
             // You can return any component that you like here!
@@ -75,8 +66,8 @@ export default function TabNavigation() {
           options={{ tabBarShowLabel: false, headerShown: false }}
         />
         <Tab.Screen
-          name="test"
-          component={Test}
+          name="news"
+          component={News}
           options={{ tabBarShowLabel: false, headerShown: false }}
         />
       </Tab.Navigator>

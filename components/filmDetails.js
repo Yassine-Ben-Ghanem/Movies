@@ -107,13 +107,14 @@ class FilmDetail extends React.Component {
 
   _displayFloatingActionButton() {
     const { film } = this.state;
-    if (film != undefined && Platform.OS === "andriod") {
+    console.log(film);
+    if (film != undefined && Platform.OS === "android") {
       return (
         <TouchableOpacity
           style={styles.share_touchable_floatingactionbutton}
           onPress={() => this._shareFilm()}
         >
-          <Icon name="sharealt" size={40} />
+          <Icon name="sharealt" size={40} color="#fff" />
         </TouchableOpacity>
       );
     }
@@ -135,7 +136,7 @@ class FilmDetail extends React.Component {
                 : require("../assets/not-found.png")
             }
           />
-          <Text style={styles.tiltle_text}>{film.title}</Text>
+          <Text style={styles.title_text}>{film.title}</Text>
           <TouchableOpacity
             style={styles.favorite_container}
             onPress={() => this._toggleFavorite()}
@@ -164,20 +165,40 @@ class FilmDetail extends React.Component {
     }
   }
   render() {
+    console.log("test");
     // console.log(this.props);
     // const film = route.params;
     return (
       <View style={styles.main_container}>
         {this._displayFilm()}
         {this._displayLoading()}
+        {this._displayFloatingActionButton()}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  scrollview_container: {
+    flex: 1,
+    backgroundColor: "red",
+  },
   main_container: {
     flex: 1,
+  },
+  image_film: {
+    height: 200,
+  },
+
+  main_container: {
+    flex: 1,
+  },
+  favorite_container: {
+    alignItems: "center",
+  },
+  favoriteImage: {
+    width: 40,
+    height: 40,
   },
   loading_container: {
     position: "absolute",
@@ -191,45 +212,41 @@ const styles = StyleSheet.create({
   scrollview_container: {
     flex: 1,
   },
-  image_film: {
-    height: "50%",
-    // margin: 5,
-    // alignSelf: "center",
+  image: {
+    height: 169,
+    margin: 5,
   },
-  tiltle_text: {
+  title_text: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 35,
     flex: 1,
     flexWrap: "wrap",
-    paddingRight: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10,
+    marginBottom: 10,
+    color: "#000000",
     textAlign: "center",
   },
   description_text: {
     fontStyle: "italic",
     color: "#666666",
-    padding: 5,
     margin: 5,
+    marginBottom: 15,
   },
   default_text: {
     marginLeft: 5,
     marginRight: 5,
     marginTop: 5,
   },
-  favorite_container: {
-    alignItems: "center",
-  },
-  favoriteImage: {
-    width: 40,
-    height: 40,
-  },
   share_touchable_floatingactionbutton: {
-    position: "absolute",
-    width: 60,
     height: 60,
-    right: 30,
+    width: 60,
+    position: "absolute",
     bottom: 30,
+    right: 10,
+    backgroundColor: "blue",
     borderRadius: 30,
-    backgroundColor: "#e91e63",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -237,7 +254,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    favoriteFilm: state.favoriteFilm,
+    favoriteFilm: state.toggleFavorite.favoriteFilm,
   };
 };
 

@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = (state) => {
   return {
-    favoriteFilm: state.favoriteFilm,
+    favoriteFilm: state.toggleFavorite.favoriteFilm,
   };
 };
 

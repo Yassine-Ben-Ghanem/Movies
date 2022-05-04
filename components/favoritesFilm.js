@@ -2,29 +2,35 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { connect } from "react-redux";
 import FilmList from "./filmList";
-
+import Avatar from "./Avatar";
 class FavoritesFilm extends React.Component {
   render() {
-    console.log(this.props);
     return (
-      <FilmList
-        films={this.props.favoriteFilm}
-        navigation={this.props.navigation}
-        favoriteList={true}
-      />
+      <View style={styles.main_container}>
+        <View style={styles.avatar_container}>
+          <Avatar />
+        </View>
+        <FilmList
+          films={this.props.favoriteFilm}
+          navigation={this.props.navigation}
+          favoriteList={true}
+        />
+      </View>
     );
   }
 }
 const styles = StyleSheet.create({
-  text: {
+  main_container: {
+    flex: 1,
+  },
+  avatar_container: {
     alignItems: "center",
-    justifyContent: "center",
   },
 });
 
 const mapStateToProps = (state) => {
   return {
-    favoriteFilm: state.favoriteFilm,
+    favoriteFilm: state.toggleFavorite.favoriteFilm,
   };
 };
 
